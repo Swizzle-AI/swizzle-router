@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "swizzle-router"
+version = "0.1.0"
+description = "Semantic router, Matryoshka domain embeddings, and prefix-aware cluster load balancer for Swizzle AI"
+readme = "README.md"
+authors = [{ name = "Paramveer singh", email = "paramveer@swizzle.ai" }]
+license = { text = "Apache-2.0" }
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.24.0",
+    "pydantic>=2.0.0"
+]
+
+[project.optional-dependencies]
+embeddings = [
+    "torch>=2.0.0",
+    "sentence-transformers>=2.2.0"
+]
+test = [
+    "pytest>=7.0"
+]
