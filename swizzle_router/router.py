@@ -8,7 +8,7 @@ class Route:
     name: str
     target_cluster: str
     sample_queries: List[str]
-    threshold: float = 0.82
+    threshold: float = 0.45
     metadata: Dict = field(default_factory=dict)
 
 @dataclass
@@ -38,9 +38,9 @@ class SemanticRouter:
         """Deterministic 64-dim pseudo-embedding for fast CPU routing when torch is unmounted."""
         vec = np.zeros(64, dtype=np.float32)
         words = text.lower().split()
-        for i, w in enumerate(words):
-            h = hash(w) % 64
-            vec[h] += 1.0 / (i + 1.0)
+        for w in words:
+            h = abs(hash(w)) % 64
+            vec[h] += 1.0
         norm = np.linalg.norm(vec)
         return vec / (norm + 1e-9)
 
